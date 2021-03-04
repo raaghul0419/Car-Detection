@@ -1,0 +1,20 @@
+import cv2
+
+img_file="img1.jpg" #Our Image
+
+classifier_file="car.xml" #Pre-trained car classifier
+
+img=cv2.imread(img_file) #create opencv image ... reads all the pixels of the image and reads it into a multidimensional array.
+
+car_detect=cv2.CascadeClassifier(classifier_file) #Create car classifier
+
+gray_scaled_img=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY) #convert to gray scale
+
+cars=car_detect.detectMultiScale(gray_scaled_img) #detect cars
+for (x,y,w,h) in cars :
+    cv2.rectangle(img,(x,y),(x+w,y+h),(0,255,0),2) #draw rectangles around the cars
+
+cv2.imshow("Car Detector",img) #Displays the image with detected cars
+cv2.waitKey()
+
+print("Code Completed !")
